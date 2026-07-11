@@ -23,10 +23,7 @@ async def load_cogs():
             await bot.load_extension(f'cogs.{filename[:-3]}')
             print(f'Cargado: {filename}')
 
-async def main():
-    async with bot:
-        await load_cogs()
-        await bot.start(TOKEN)
+24         print(f'Cargado: {filename}')
 
-if _name_ == "_main_":
-    asyncio.run(main())
+25 
+26 bot.run(TOKEN)
