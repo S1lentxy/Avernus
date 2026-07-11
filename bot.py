@@ -23,7 +23,4 @@ async def load_cogs():
             await bot.load_extension(f'cogs.{filename[:-3]}')
             print(f'Cargado: {filename}')
 
-24         print(f'Cargado: {filename}')
-
-25 
-26 bot.run(TOKEN)
+bot.run(TOKEN)
