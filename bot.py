@@ -1,19 +1,32 @@
+import asyncio
+import os
 import discord
 from discord.ext import commands
-import os
-import asyncio
+from dotenv import load_dotenv
 
-TOKEN = os.getenv('TOKEN') # Railway te lo pasa solo
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
 
-bot = commands.Bot(command_prefix='>', intents=discord.Intents.all())
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix=">", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user} CONECTADO 24/7')
+    print(f'✅ {bot.user} CONECTADO 24/7')
+    # Sync instantáneo solo para tu servidor Avernus
+    await bot.tree.sync(guild=discord.Object(id=1522055657589833779))
+    print("Slash commands sincronizados")
+
+async def load_cogs():
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            await bot.load_extension(f'cogs.{filename[:-3]}')
+            print(f'Cargado: {filename}')
 
 async def main():
     async with bot:
-        await bot.load_extension("cogs.moderation") 
+        await load_cogs()
         await bot.start(TOKEN)
 
-asyncio.run(main())
+if name == "main":
+    asyncio.run(main())
