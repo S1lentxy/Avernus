@@ -13,7 +13,7 @@ bot = commands.Bot(command_prefix=">", intents=intents)
 @bot.event
 async def on_ready():
     print(f'✅ {bot.user} CONECTADO 24/7')
-    # Sync instantáneo solo para tu servidor Avernus
+    # Sync instantáneo para tu servidor Avernus
     await bot.tree.sync(guild=discord.Object(id=1522055657589833779))
     print("Slash commands sincronizados")
 
@@ -28,5 +28,5 @@ async def main():
         await load_cogs()
         await bot.start(TOKEN)
 
-if name == "main":
+if _name_ == "_main_":
     asyncio.run(main())
