@@ -27,7 +27,7 @@ class Shop(commands.Cog):
         if not rows:
             return await interaction.response.send_message("🛒 La tienda está vacía.", ephemeral=True)
 
-        embed = discord.Embed(title="🛒 TIENDA AVERNUS", color=0xFFEE75C)
+        embed = discord.Embed(title="🛒 TIENDA AVERNUS", color=0xFFEE75)
         for row in rows:
             embed.add_field(name=f"ID: {row['id']} | {row['name']}", 
                            value=f"Precio: **{row['price']}** coins", inline=False)
