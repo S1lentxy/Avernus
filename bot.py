@@ -12,8 +12,22 @@ bot = commands.Bot(command_prefix=">", intents=intents)
 @bot.event
 async def on_ready():
     print(f"✅ {bot.user} CONECTADO 24/7")
-    await bot.tree.sync(guild=discord.Object(id=1522055657589833779))
-    print("Slash commands sincronizados")
+    
+    # Sincronizar comandos (esto es importante)
+    try:
+        # Sincronización global (puede tardar hasta 1 hora)
+        synced = await bot.tree.sync()
+        print(f"✅ {len(synced)} comandos sincronizados globalmente")
+    except Exception as e:
+        print(f"❌ Error global: {e}")
+    
+    try:
+        # Sincronización rápida en tu servidor (recomendado)
+        guild = discord.Object(id=1522055657589833779)  # Cambia si es otro servidor
+        await bot.tree.sync(guild=guild)
+        print("✅ Comandos sincronizados en el servidor")
+    except Exception as e:
+        print(f"❌ Error en guild sync: {e}")
 
 async def load_cogs():
     print("📂 Cargando extensiones...")
